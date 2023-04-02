@@ -2,11 +2,12 @@ package routes
 
 import (
 	"github.com/gin-gonic/gin"
+	api "go-ecommerce/api/v1"
 	"go-ecommerce/middleware"
 	"net/http"
 )
 
-// 路由配置
+// NewRouter 路由配置
 func NewRouter() *gin.Engine {
 	r := gin.Default()
 	r.Use(middleware.Cors())
@@ -21,7 +22,6 @@ func NewRouter() *gin.Engine {
 
 		//用户操作
 		v1.POST("user/register", api.UserRegister)
-		v1.POST("user/login", api.UserLogin)
 	}
 	return r
 }

@@ -2,7 +2,9 @@ package v1
 
 import (
 	"github.com/gin-gonic/gin"
+	util "go-ecommerce/pkg/utils"
 	"go-ecommerce/service"
+	"net/http"
 )
 
 // UserRegister 用户注册接口
@@ -12,19 +14,19 @@ func UserRegister(c *gin.Context) {
 		res := userRegisterService.Register(c.Request.Context())
 		c.JSON(200, res)
 	} else {
-		c.JSON(400, ErrorResponse(err))
+		c.JSON(400, http.StatusBadRequest)
 		util.LogrusObj.Infoln(err)
 	}
 }
 
 // UserLogin 用户登陆接口
-func UserLogin(c *gin.Context) {
-	var userLoginService service.UserService
-	if err := c.ShouldBind(&userLoginService); err == nil {
-		res := userLoginService.Login(c.Request.Context())
-		c.JSON(200, res)
-	} else {
-		c.JSON(400, ErrorResponse(err))
-		util.LogrusObj.Infoln(err)
-	}
-}
+//func UserLogin(c *gin.Context) {
+//	var userLoginService service.UserService
+//	if err := c.ShouldBind(&userLoginService); err == nil {
+//		res := userLoginService.Login(c.Request.Context())
+//		c.JSON(200, res)
+//	} else {
+//		c.JSON(400, ErrorResponse(err))
+//		util.LogrusObj.Infoln(err)
+//	}
+//}
