@@ -20,13 +20,13 @@ func UserRegister(c *gin.Context) {
 }
 
 // UserLogin 用户登陆接口
-//func UserLogin(c *gin.Context) {
-//	var userLoginService service.UserService
-//	if err := c.ShouldBind(&userLoginService); err == nil {
-//		res := userLoginService.Login(c.Request.Context())
-//		c.JSON(200, res)
-//	} else {
-//		c.JSON(400, ErrorResponse(err))
-//		util.LogrusObj.Infoln(err)
-//	}
-//}
+func UserLogin(c *gin.Context) {
+	var userLoginService service.UserService
+	if err := c.ShouldBind(&userLoginService); err == nil {
+		res := userLoginService.Login(c.Request.Context())
+		c.JSON(200, res)
+	} else {
+		c.JSON(400, http.StatusBadRequest)
+		util.LogrusObj.Infoln(err)
+	}
+}

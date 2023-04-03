@@ -10,7 +10,7 @@ var MsgFlags = map[int]string{
 	ErrorExistNick:          "已存在该昵称",
 	ErrorExistUser:          "已存在该用户名",
 	ErrorNotExistUser:       "该用户不存在",
-	ErrorNotCompare:         "账号密码错误",
+	ErrorPasswordWrong:      "账号密码错误",
 	ErrorNotComparePassword: "两次密码输入不一致",
 	ErrorFailEncryption:     "加密失败",
 	ErrorNotExistProduct:    "该商品不存在",

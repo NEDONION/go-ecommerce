@@ -11,7 +11,7 @@ const (
 	ErrorExistNick          = 10001
 	ErrorExistUser          = 10002
 	ErrorNotExistUser       = 10003
-	ErrorNotCompare         = 10004
+	ErrorPasswordWrong      = 10004
 	ErrorNotComparePassword = 10005
 	ErrorFailEncryption     = 10006
 	ErrorNotExistProduct    = 10007
