@@ -30,3 +30,16 @@ func UserLogin(c *gin.Context) {
 		util.LogrusObj.Infoln(err)
 	}
 }
+
+// UserUpdate 用户更新接口
+func UserUpdate(c *gin.Context) {
+	var userUpdateService service.UserService
+	claims, _ := util.ParseToken(c.GetHeader("Authorization"))
+	if err := c.ShouldBind(&userUpdateService); err == nil {
+		res := userUpdateService.Update(c.Request.Context(), claims.ID)
+		c.JSON(200, res)
+	} else {
+		c.JSON(400, http.StatusBadRequest)
+		util.LogrusObj.Infoln(err)
+	}
+}

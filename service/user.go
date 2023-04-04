@@ -114,3 +114,32 @@ func (service UserService) Login(ctx context.Context) serializer.Response {
 		Msg:    e.GetMsg(code),
 	}
 }
+
+// Update 用户修改信息
+func (service UserService) Update(ctx context.Context, uId uint) serializer.Response {
+	var err error
+	code := e.SUCCESS
+	// retrieve user
+	userDao := dao.NewUserDao(ctx)
+	user, err := userDao.GetUserById(uId)
+	if service.NickName != "" {
+		user.NickName = service.NickName
+	}
+
+	err = userDao.UpdateUserById(uId, user)
+	if err != nil {
+		logging.Info(err)
+		code = e.ErrorDatabase
+		return serializer.Response{
+			Status: code,
+			Msg:    e.GetMsg(code),
+			Error:  err.Error(),
+		}
+	}
+
+	return serializer.Response{
+		Status: code,
+		Data:   serializer.BuildUser(user),
+		Msg:    e.GetMsg(code),
+	}
+}
