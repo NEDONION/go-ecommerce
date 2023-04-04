@@ -11,13 +11,13 @@ import (
 // UploadToQiNiu 封装上传图片到七牛云然后返回状态和图片的url，单张
 func UploadToQiNiu(file multipart.File, fileSize int64) (path string, err error) {
 	var AccessKey = conf.AccessKey
-	var SerectKey = conf.SerectKey
+	var SecretKey = conf.SecretKey
 	var Bucket = conf.Bucket
 	var ImgUrl = conf.QiniuServer
 	putPolicy := storage.PutPolicy{
 		Scope: Bucket,
 	}
-	mac := qbox.NewMac(AccessKey, SerectKey)
+	mac := qbox.NewMac(AccessKey, SecretKey)
 	upToken := putPolicy.UploadToken(mac)
 	cfg := storage.Config{
 		Zone:          &storage.ZoneHuadongZheJiang2,

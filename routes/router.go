@@ -30,8 +30,12 @@ func NewRouter() *gin.Engine {
 		authed := v1.Group("/") //需要登陆保护
 		authed.Use(middleware.JWT())
 		{
+			// 用户操作
 			authed.PUT("user", api.UserUpdate)
 			authed.POST("avatar", api.UploadAvatar) //上传头像
+
+			// 显示金额
+			authed.POST("money", api.ShowMoney)
 		}
 	}
 	return r

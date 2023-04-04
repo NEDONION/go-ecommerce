@@ -32,7 +32,7 @@ var (
 	AvatarPath  string
 
 	AccessKey   string
-	SerectKey   string
+	SecretKey   string
 	Bucket      string
 	QiniuServer string
 )
@@ -86,7 +86,7 @@ func LoadPhotoPath(file *ini.File) {
 
 func LoadQiniu(file *ini.File) {
 	AccessKey = file.Section("qiniu").Key("AccessKey").String()
-	SerectKey = file.Section("qiniu").Key("SerectKey").String()
+	SecretKey = file.Section("qiniu").Key("SecretKey").String()
 	Bucket = file.Section("qiniu").Key("Bucket").String()
 	QiniuServer = file.Section("qiniu").Key("QiniuServer").String()
 }
