@@ -45,6 +45,7 @@ func UserUpdate(c *gin.Context) {
 }
 
 // UploadAvatar 上传头像接口
+// TODO 测试功能，目前无法使用
 func UploadAvatar(c *gin.Context) {
 	file, fileHeader, _ := c.Request.FormFile("file")
 	fileSize := fileHeader.Size
