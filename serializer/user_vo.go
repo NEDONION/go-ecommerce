@@ -1,7 +1,6 @@
 package serializer
 
 import (
-	"go-ecommerce/conf"
 	"go-ecommerce/model"
 )
 
@@ -24,8 +23,8 @@ func BuildUser(user *model.User) UserVO {
 		NickName: user.NickName,
 		Email:    user.Email,
 		Status:   user.Status,
-		Avatar:   conf.Host + conf.HttpPort + conf.AvatarPath + user.Avatar,
-		//Avatar:   user.AvatarURL(),
+		//Avatar:   conf.Host + conf.HttpPort + conf.AvatarPath + user.Avatar,
+		Avatar:   user.AvatarURL(),
 		CreateAt: user.CreatedAt.Unix(),
 	}
 }

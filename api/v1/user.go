@@ -43,3 +43,18 @@ func UserUpdate(c *gin.Context) {
 		util.LogrusObj.Infoln(err)
 	}
 }
+
+// UploadAvatar 上传头像接口
+func UploadAvatar(c *gin.Context) {
+	file, fileHeader, _ := c.Request.FormFile("file")
+	fileSize := fileHeader.Size
+	uploadAvatarService := service.UserService{}
+	chaim, _ := util.ParseToken(c.GetHeader("Authorization"))
+	if err := c.ShouldBind(&uploadAvatarService); err == nil {
+		res := uploadAvatarService.UploadAvatar(c.Request.Context(), chaim.ID, file, fileSize)
+		c.JSON(200, res)
+	} else {
+		c.JSON(400, http.StatusBadRequest)
+		util.LogrusObj.Infoln(err)
+	}
+}

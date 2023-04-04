@@ -30,6 +30,11 @@ var (
 	Host        string
 	ProductPath string
 	AvatarPath  string
+
+	AccessKey   string
+	SerectKey   string
+	Bucket      string
+	QiniuServer string
 )
 
 func Init() {
@@ -42,6 +47,7 @@ func Init() {
 	LoadDataBase(file)
 	LoadRedis(file)
 	LoadPhotoPath(file)
+	LoadQiniu(file)
 	//LoadEs(file)
 
 	//MySQL
@@ -76,4 +82,11 @@ func LoadPhotoPath(file *ini.File) {
 	Host = file.Section("photo").Key("Host").String()
 	ProductPath = file.Section("photo").Key("ProductPath").String()
 	AvatarPath = file.Section("photo").Key("AvatarPath").String()
+}
+
+func LoadQiniu(file *ini.File) {
+	AccessKey = file.Section("qiniu").Key("AccessKey").String()
+	SerectKey = file.Section("qiniu").Key("SerectKey").String()
+	Bucket = file.Section("qiniu").Key("Bucket").String()
+	QiniuServer = file.Section("qiniu").Key("QiniuServer").String()
 }

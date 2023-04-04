@@ -28,6 +28,7 @@ func NewRouter() *gin.Engine {
 		authed.Use(middleware.JWT())
 		{
 			authed.PUT("user", api.UserUpdate)
+			authed.POST("avatar", api.UploadAvatar) //上传头像
 		}
 	}
 	return r

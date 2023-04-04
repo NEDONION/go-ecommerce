@@ -8,6 +8,7 @@ import (
 	"go-ecommerce/pkg/e"
 	util "go-ecommerce/pkg/utils"
 	"go-ecommerce/serializer"
+	"mime/multipart"
 )
 
 // UserService 管理用户服务
@@ -137,6 +138,48 @@ func (service UserService) Update(ctx context.Context, uId uint) serializer.Resp
 		}
 	}
 
+	return serializer.Response{
+		Status: code,
+		Data:   serializer.BuildUser(user),
+		Msg:    e.GetMsg(code),
+	}
+}
+
+func (service UserService) UploadAvatar(ctx context.Context, uId uint, file multipart.File, fileSize int64) serializer.Response {
+	code := e.SUCCESS
+	var err error
+
+	path, err := UploadToQiNiu(file, fileSize)
+	if err != nil {
+		code = e.ErrorUploadFile
+		return serializer.Response{
+			Status: code,
+			Data:   e.GetMsg(code),
+			Error:  path,
+		}
+	}
+	userDao := dao.NewUserDao(ctx)
+	user, err := userDao.GetUserById(uId)
+	if err != nil {
+		logging.Info(err)
+		code = e.ErrorDatabase
+		return serializer.Response{
+			Status: code,
+			Msg:    e.GetMsg(code),
+			Error:  err.Error(),
+		}
+	}
+	user.Avatar = path
+	err = userDao.UpdateUserById(uId, user)
+	if err != nil {
+		logging.Info(err)
+		code = e.ErrorDatabase
+		return serializer.Response{
+			Status: code,
+			Msg:    e.GetMsg(code),
+			Error:  err.Error(),
+		}
+	}
 	return serializer.Response{
 		Status: code,
 		Data:   serializer.BuildUser(user),
