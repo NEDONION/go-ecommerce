@@ -26,15 +26,18 @@ func NewRouter() *gin.Engine {
 
 		// 商品操作
 		v1.GET("products", api.ListProducts)
+		v1.GET("product/:id", api.ShowProductDetails)
+		v1.POST("products", api.SearchProducts)
+		v1.GET("product/imgs/:id", api.ListProductImg) // 获取商品图片
 
-		v1.GET("carousels", api.ListCarousels) //轮播图
+		v1.GET("carousels", api.ListCarousels) // 轮播图
 
-		authed := v1.Group("/") //需要登陆保护
+		authed := v1.Group("/") // 需要登陆保护
 		authed.Use(middleware.JWT())
 		{
 			// 用户操作
 			authed.PUT("user", api.UserUpdate)
-			authed.POST("avatar", api.UploadAvatar) //上传头像
+			authed.POST("avatar", api.UploadAvatar) // 上传头像
 
 			// 显示金额
 			authed.POST("money", api.ShowMoney)

@@ -32,3 +32,34 @@ func ListProducts(c *gin.Context) {
 		util.LogrusObj.Infoln(err)
 	}
 }
+
+// SearchProducts 搜索商品
+func SearchProducts(c *gin.Context) {
+	searchProductsService := service.ProductService{}
+	if err := c.ShouldBind(&searchProductsService); err == nil {
+		res := searchProductsService.SearchProducts(c.Request.Context())
+		c.JSON(200, res)
+	} else {
+		c.JSON(400, ErrorResponse(err))
+		util.LogrusObj.Infoln(err)
+	}
+}
+
+// ShowProductDetails 商品详情
+func ShowProductDetails(c *gin.Context) {
+	showProductService := service.ProductService{}
+	res := showProductService.ShowDetails(c.Request.Context(), c.Param("id"))
+	c.JSON(200, res)
+}
+
+// ListProductImg 获取商品图片
+func ListProductImg(c *gin.Context) {
+	var listProductImgService service.ListProductImgService
+	if err := c.ShouldBind(&listProductImgService); err == nil {
+		res := listProductImgService.List(c.Request.Context(), c.Param("id"))
+		c.JSON(200, res)
+	} else {
+		c.JSON(400, ErrorResponse(err))
+		util.LogrusObj.Infoln(err)
+	}
+}

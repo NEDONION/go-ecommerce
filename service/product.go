@@ -117,7 +117,6 @@ func (service *ProductService) Create(ctx context.Context, uId uint, files []*mu
 // ShowDetails 展示商品详情
 func (service *ProductService) ShowDetails(ctx context.Context, id string) serializer.Response {
 	code := e.SUCCESS
-
 	pId, _ := strconv.Atoi(id)
 
 	productDao := dao.NewProductDao(ctx)
@@ -171,4 +170,25 @@ func (service *ProductService) ListProducts(ctx context.Context) serializer.Resp
 	wg.Wait()
 
 	return serializer.BuildListResponse(serializer.BuildProducts(products), uint(total))
+}
+
+// SearchProducts 搜索商品
+func (service *ProductService) SearchProducts(ctx context.Context) serializer.Response {
+	code := e.SUCCESS
+	if service.PageSize == 0 {
+		service.PageSize = 15
+	}
+
+	productDao := dao.NewProductDao(ctx)
+	products, err := productDao.SearchProduct(service.Info, service.BasePage)
+	if err != nil {
+		logging.Info(err)
+		code = e.ErrorDatabase
+		return serializer.Response{
+			Status: code,
+			Msg:    e.GetMsg(code),
+			Error:  err.Error(),
+		}
+	}
+	return serializer.BuildListResponse(serializer.BuildProducts(products), uint(len(products)))
 }
