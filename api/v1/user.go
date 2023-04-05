@@ -4,7 +4,6 @@ import (
 	"github.com/gin-gonic/gin"
 	util "go-ecommerce/pkg/utils"
 	"go-ecommerce/service"
-	"net/http"
 )
 
 // UserRegister 用户注册接口
@@ -14,7 +13,7 @@ func UserRegister(c *gin.Context) {
 		res := userRegisterService.Register(c.Request.Context())
 		c.JSON(200, res)
 	} else {
-		c.JSON(400, http.StatusBadRequest)
+		c.JSON(400, ErrorResponse(err))
 		util.LogrusObj.Infoln(err)
 	}
 }
@@ -26,7 +25,7 @@ func UserLogin(c *gin.Context) {
 		res := userLoginService.Login(c.Request.Context())
 		c.JSON(200, res)
 	} else {
-		c.JSON(400, http.StatusBadRequest)
+		c.JSON(400, ErrorResponse(err))
 		util.LogrusObj.Infoln(err)
 	}
 }
@@ -39,7 +38,7 @@ func UserUpdate(c *gin.Context) {
 		res := userUpdateService.Update(c.Request.Context(), claims.ID)
 		c.JSON(200, res)
 	} else {
-		c.JSON(400, http.StatusBadRequest)
+		c.JSON(400, ErrorResponse(err))
 		util.LogrusObj.Infoln(err)
 	}
 }
@@ -55,7 +54,7 @@ func UploadAvatar(c *gin.Context) {
 		res := uploadAvatarService.UploadAvatar(c.Request.Context(), chaim.ID, file, fileSize)
 		c.JSON(200, res)
 	} else {
-		c.JSON(400, http.StatusBadRequest)
+		c.JSON(400, ErrorResponse(err))
 		util.LogrusObj.Infoln(err)
 	}
 }

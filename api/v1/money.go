@@ -4,7 +4,6 @@ import (
 	"github.com/gin-gonic/gin"
 	util "go-ecommerce/pkg/utils"
 	"go-ecommerce/service"
-	"net/http"
 )
 
 func ShowMoney(c *gin.Context) {
@@ -14,7 +13,7 @@ func ShowMoney(c *gin.Context) {
 		res := showMoneyService.Show(c.Request.Context(), claim.ID)
 		c.JSON(200, res)
 	} else {
-		c.JSON(400, http.StatusBadRequest)
+		c.JSON(400, ErrorResponse(err))
 		util.LogrusObj.Infoln(err)
 	}
 }

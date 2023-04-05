@@ -42,10 +42,10 @@ const (
 	ErrorCallApi                   = 30008
 	ErrorUnmarshalJson             = 30009
 	ErrorAdminFindUser             = 30010
-	//数据库错误
+	// 数据库错误
 	ErrorDatabase = 40001
 
-	//对象存储错误
+	// 对象存储错误
 	ErrorOss        = 50001
 	ErrorUploadFile = 50002
 )
