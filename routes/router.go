@@ -28,7 +28,8 @@ func NewRouter() *gin.Engine {
 		v1.GET("products", api.ListProducts)
 		v1.GET("product/:id", api.ShowProductDetails)
 		v1.POST("products", api.SearchProducts)
-		v1.GET("product/imgs/:id", api.ListProductImg) // 获取商品图片
+		v1.GET("product/images/:id", api.ListProductImg) // 获取商品图片
+		v1.GET("categories", api.ListCategories)         //商品分类
 
 		v1.GET("carousels", api.ListCarousels) // 轮播图
 
