@@ -1,0 +1,1 @@
+time="2023-04-05 01:29:21" level=info msg="json: cannot unmarshal string into Go struct field FavoritesService.product_id of type uint"

@@ -8,16 +8,17 @@ const (
 	InvalidParams         = 400
 
 	// 成员错误
-	ErrorExistNick          = 10001
-	ErrorExistUser          = 10002
-	ErrorNotExistUser       = 10003
-	ErrorPasswordWrong      = 10004
-	ErrorNotComparePassword = 10005
-	ErrorFailEncryption     = 10006
-	ErrorNotExistProduct    = 10007
-	ErrorNotExistAddress    = 10008
-	ErrorExistFavorite      = 10009
-	ErrorUserNotFound       = 10010
+	ErrorExistNick           = 10001
+	ErrorExistUser           = 10002
+	ErrorNotExistUser        = 10003
+	ErrorPasswordWrong       = 10004
+	ErrorNotComparePassword  = 10005
+	ErrorFailEncryption      = 10006
+	ErrorNotExistProduct     = 10007
+	ErrorNotExistAddress     = 10008
+	ErrorExistFavorite       = 10009
+	ErrorUserNotFound        = 10010
+	ErrorNotOperateOtherUser = 10011
 
 	// 店家错误
 	ErrorBossCheckTokenFail        = 20001
